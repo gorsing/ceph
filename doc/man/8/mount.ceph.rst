@@ -190,7 +190,7 @@ Advanced
     option is enabled, a namespace operation may complete before the MDS
     replies, if it has sufficient capabilities to do so.
 
-Examples
+Examples single cephfs disk
 ========
 
 Mount the full file system::
@@ -225,6 +225,22 @@ history::
 If authentication is disabled on Ceph cluster, omit the credential related option::
 
     mount.ceph fs_user@.mycephfs2=/ /mnt/mycephfs
+    
+Examples multiple cephfs disk
+========
+
+Create cephfs disks::
+
+   ceph fs volume create volume_name1 [<placement>]
+   
+   ceph fs volume create volume_name2 [<placement>]
+  
+Add to /etc/fstab::
+
+
+    1.2.3.4:6789:/folder1  /vol_1 ceph  name=admin,secretfile=/etc/ceph/secret_volume_name1.key,fs=volume_name1,noatime,_netdev  0  2
+
+    1.2.3.4:6789:/folder2  /vol_2 ceph  name=admin,secretfile=/etc/ceph/secret_volume_name2.key,fs=volume_name2,noatime,_netdev  0  2
 
 Availability
 ============
